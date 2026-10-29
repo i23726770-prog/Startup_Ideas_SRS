@@ -15,7 +15,10 @@ function addIdea() {
     // Кнопка удаления с подтверждением
     li.innerHTML = `
         <span>${ideaText}</span>
-        <button onclick="if(confirm('Удалить идею?')) this.parentElement.remove()">Удалить</button>
+        <div>
+            <button onclick="editIdea(this.previousElementSibling)">Ред.</button>
+            <button onclick="if(confirm('Удалить идею?')) this.parentElement.parentElement.remove()">Удалить</button>
+        </div>
     `;
     
     ideaList.appendChild(li);
@@ -23,4 +26,13 @@ function addIdea() {
     // Очищаем поле
     ideaInput.value = '';
     ideaInput.focus();
+    
+    function editIdea(spanElement) {
+    const currentText = spanElement.innerText;
+    const newText = prompt('Редактировать идею:', currentText);
+    
+    if (newText !== null && newText.trim() !== "") {
+        spanElement.innerText = newText.trim();
+    }
+}
 }
